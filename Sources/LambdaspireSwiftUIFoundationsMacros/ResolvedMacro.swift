@@ -27,6 +27,11 @@ public struct ResolvedMacro : AccessorMacro, PeerMacro {
                 return []
             }
             
+            // TODO: This is dirty and will result in multiple initialisations of the @State variable.
+            // Need to find a better way.
+            // For now, the only decent workarounds currently are:
+            // - componentise heavily (i.e. `DumbComponent(dep: resolvedDep)`)
+            // - just store the computed value every render cycle (i.e. `let dep = resolvedDep`... `Text(dep.etc) + Text(dep.andSoOn)`)
             return [
                 """
                 get {
