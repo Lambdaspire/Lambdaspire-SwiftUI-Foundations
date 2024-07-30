@@ -72,6 +72,7 @@ final class LambdaspireSwiftUIFoundationsMacrosTests: XCTestCase {
             
                 func initialise(scope: any DependencyResolutionScope) {
                     self.dependency = scope.resolve()
+                    postInitialise()
                 }
             }
 

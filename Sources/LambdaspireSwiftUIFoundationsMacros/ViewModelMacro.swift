@@ -39,6 +39,7 @@ public struct ViewModelMacro : ExtensionMacro, MemberMacro {
                 """
                 func initialise(scope: any DependencyResolutionScope) {
                     \(raw: assignments.joined(separator: "\n"))
+                    postInitialise()
                 }
                 """
             ]
