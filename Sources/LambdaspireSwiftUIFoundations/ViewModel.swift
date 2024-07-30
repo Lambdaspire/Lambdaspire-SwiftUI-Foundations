@@ -1,13 +1,14 @@
 
+import Combine
 import LambdaspireAbstractions
 
-public protocol ViewModel {
+public protocol ViewModel : ObservableObject {
     static var empty: Self { get }
     func initialise(scope: DependencyResolutionScope)
     func postInitialise()
 }
 
-extension ViewModel {
+public extension ViewModel {
     func postInitialise() {
         // No-op by default.
     }

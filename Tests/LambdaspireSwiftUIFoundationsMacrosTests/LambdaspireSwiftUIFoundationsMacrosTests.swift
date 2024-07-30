@@ -30,7 +30,7 @@ final class LambdaspireSwiftUIFoundationsMacrosTests: XCTestCase {
                 }
             }
             
-            @ViewModel
+            @ViewModel(generateEmpty: true)
             class ViewModel : ObservableObject {
                 @Published private(set) var text: String = "Initial"
             
@@ -74,6 +74,11 @@ final class LambdaspireSwiftUIFoundationsMacrosTests: XCTestCase {
                     self.dependency = scope.resolve()
                     postInitialise()
                 }
+            
+                init() {
+                }
+            
+                static let empty: ViewModel  = .init()
             }
 
             extension TestView : ViewWithViewModel {
@@ -107,33 +112,15 @@ final class LambdaspireSwiftUIFoundationsMacrosTests: XCTestCase {
             struct TestView : View {
                 var a: Int {
                     get {
-                        guard let resolved_a else {
-                            let r: Int = resolved_scope.resolve()
-                            DispatchQueue.main.async {
-                                resolved_a = r
-                            }
-                            return r
-                        }
-                        return resolved_a
+                        resolved_scope.resolve()
                     }
                 }
-
-                @State private var resolved_a: Int? = nil
                 private var b: Bool {
                     get {
-                        guard let resolved_b else {
-                            let r: Bool = resolved_scope.resolve()
-                            DispatchQueue.main.async {
-                                resolved_b = r
-                            }
-                            return r
-                        }
-                        return resolved_b
+                        resolved_scope.resolve()
                     }
                 }
-
-                @State private var resolved_b: Bool? = nil
-
+            
                 var body: some View {
                     Text("Test")
                 }

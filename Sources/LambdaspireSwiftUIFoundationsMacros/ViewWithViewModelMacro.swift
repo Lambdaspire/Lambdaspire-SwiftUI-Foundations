@@ -16,7 +16,7 @@ public struct ViewWithViewModelMacro : ExtensionMacro, MemberMacro {
                 // TODO: Error
                 return []
             }
-            
+
             let type = structDecl.name
             
             return [

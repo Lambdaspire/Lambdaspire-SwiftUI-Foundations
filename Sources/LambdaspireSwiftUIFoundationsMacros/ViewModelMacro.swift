@@ -17,6 +17,17 @@ public struct ViewModelMacro : ExtensionMacro, MemberMacro {
                 return []
             }
             
+            let type = classDecl.name
+            
+            let shouldGenerateEmpty = node
+                .arguments?
+                .as(LabeledExprListSyntax.self)?
+                .compactMap { l in l.as(LabeledExprSyntax.self) }
+                .contains { l in
+                    l.expression.is(BooleanLiteralExprSyntax.self) &&
+                    l.label?.trimmed.text == "generateEmpty"
+                } ?? false
+            
             let assignments = classDecl
                 .memberBlock
                 .members
@@ -35,14 +46,26 @@ public struct ViewModelMacro : ExtensionMacro, MemberMacro {
                     "self.\(name) = scope.resolve()"
                 }
             
+            let emptyGeneration: [DeclSyntax] = shouldGenerateEmpty
+                ? [
+                    """
+                    init() { }
+                    """,
+                    """
+                    static let empty: \(raw: type) = .init()
+                    """
+                ]
+                : []
+            
             return [
                 """
                 func initialise(scope: any DependencyResolutionScope) {
                     \(raw: assignments.joined(separator: "\n"))
                     postInitialise()
                 }
-                """
-            ]
+                """,
+            ] +
+            emptyGeneration
         }
     
     public static func expansion(
