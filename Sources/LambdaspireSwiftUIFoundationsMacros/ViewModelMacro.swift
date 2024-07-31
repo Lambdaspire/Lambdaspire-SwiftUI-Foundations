@@ -13,7 +13,7 @@ public struct ViewModelMacro : ExtensionMacro, MemberMacro {
         in context: some MacroExpansionContext) throws -> [DeclSyntax] {
             
             guard let classDecl = declaration.as(ClassDeclSyntax.self) else {
-                // TODO: Error
+                context.diagnose(.init(node: node, message: ViewModelMacroUsageError.notClass))
                 return []
             }
             
@@ -79,4 +79,15 @@ public struct ViewModelMacro : ExtensionMacro, MemberMacro {
             ]
             .compactMap { $0 }
         }
+}
+
+enum ViewModelMacroUsageError : String, DiagnosticMessage {
+    
+    case notClass = "@ViewModel macro must be used on a class."
+    
+    var message: String { rawValue }
+    
+    var diagnosticID: MessageID { .init(domain: "LambdaspireSwiftUIFoundations", id: "\(self)") }
+    
+    var severity: DiagnosticSeverity { .error }
 }

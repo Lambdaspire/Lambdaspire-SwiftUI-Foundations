@@ -6,7 +6,7 @@ import SwiftSyntaxMacros
 import SwiftDiagnostics
 
 @main
-struct LambdaspireDependencyResolutionMacros: CompilerPlugin {
+struct LambdaspireSwiftUIFoundationsMacros: CompilerPlugin {
     let providingMacros: [Macro.Type] = [
         ViewWithViewModelMacro.self,
         ViewModelMacro.self,

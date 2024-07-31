@@ -5,7 +5,7 @@ import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 import SwiftDiagnostics
 
-public struct ResolvedMacro : AccessorMacro, PeerMacro {
+public struct ResolvedMacro : AccessorMacro {
     
     public static func expansion(
         of node: AttributeSyntax,
@@ -19,14 +19,6 @@ public struct ResolvedMacro : AccessorMacro, PeerMacro {
                 """
             ]
         }
-    
-    public static func expansion(
-        of node: AttributeSyntax,
-        providingPeersOf declaration: some DeclSyntaxProtocol,
-        in context: some MacroExpansionContext) throws -> [DeclSyntax] {
-            // TODO: Remove MemberMacro definition.
-            []
-        }
 }
 
 enum ResolvedMacroUsageError : String, DiagnosticMessage {
@@ -35,7 +27,7 @@ enum ResolvedMacroUsageError : String, DiagnosticMessage {
     
     var message: String { rawValue }
     
-    var diagnosticID: MessageID { .init(domain: "LambdaspireDependencyResolution", id: "\(self)") }
+    var diagnosticID: MessageID { .init(domain: "LambdaspireSwiftUIFoundations", id: "\(self)") }
     
     var severity: DiagnosticSeverity { .error }
 }

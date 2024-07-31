@@ -9,7 +9,6 @@ public macro ViewWithViewModel() = #externalMacro(module: "LambdaspireSwiftUIFou
 @attached(extension, conformances: ViewModel, View)
 public macro ViewModel(generateEmpty: Bool = false) = #externalMacro(module: "LambdaspireSwiftUIFoundationsMacros", type: "ViewModelMacro")
 
-@attached(peer, names: arbitrary)
 @attached(accessor, names: named(get), named(set))
 public macro Resolved() = #externalMacro(module: "LambdaspireSwiftUIFoundationsMacros", type: "ResolvedMacro")
 

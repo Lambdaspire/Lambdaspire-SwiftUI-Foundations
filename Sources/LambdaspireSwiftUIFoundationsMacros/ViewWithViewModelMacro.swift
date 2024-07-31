@@ -13,7 +13,7 @@ public struct ViewWithViewModelMacro : ExtensionMacro, MemberMacro {
         in context: some MacroExpansionContext) throws -> [DeclSyntax] {
             
             guard let structDecl = declaration.as(StructDeclSyntax.self) else {
-                // TODO: Error
+                context.diagnose(.init(node: node, message: ViewWithViewModelMacroUsageError.notStruct))
                 return []
             }
 
@@ -45,4 +45,15 @@ public struct ViewWithViewModelMacro : ExtensionMacro, MemberMacro {
             ]
             .compactMap { $0 }
         }
+}
+
+enum ViewWithViewModelMacroUsageError : String, DiagnosticMessage {
+    
+    case notStruct = "@ViewWithViewModel macro must be used on a struct."
+    
+    var message: String { rawValue }
+    
+    var diagnosticID: MessageID { .init(domain: "LambdaspireSwiftUIFoundations", id: "\(self)") }
+    
+    var severity: DiagnosticSeverity { .error }
 }

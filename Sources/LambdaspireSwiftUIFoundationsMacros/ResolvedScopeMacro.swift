@@ -30,7 +30,7 @@ enum ResolvedScopeMacroUsageError : String, DiagnosticMessage {
     
     var message: String { rawValue }
     
-    var diagnosticID: MessageID { .init(domain: "LambdaspireDependencyResolution", id: "\(self)") }
+    var diagnosticID: MessageID { .init(domain: "LambdaspireSwiftUIFoundations", id: "\(self)") }
     
     var severity: DiagnosticSeverity { .error }
 }
