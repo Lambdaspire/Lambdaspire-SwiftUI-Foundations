@@ -192,7 +192,7 @@ The `@ViewModel` macro:
 
 Important notes:
 - Dependencies that are resolved exclusively via scope must be declared with `!` (e.g. `private var userContext: UserContext!`), since the dependency resolution occurs after Environment is installed on a View and therefore after the ViewModel's instantiation.
-    - This is not true if you override the static `empty` 
+    - This is not true if you omit the `generateEmpty` argument and supply a full `init` implementation. 
 - The `postInitialise()` function is where you would wire up your Combine pipelines. It is called after the dependencies are injected, as per the previous note.
 
 ## Example Project
