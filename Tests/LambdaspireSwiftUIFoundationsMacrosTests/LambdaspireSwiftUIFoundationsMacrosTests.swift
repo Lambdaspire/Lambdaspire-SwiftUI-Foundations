@@ -49,7 +49,7 @@ final class LambdaspireSwiftUIFoundationsMacrosTests: XCTestCase {
                     Text("\(vm.text)")
                 }
 
-                @StateObject private var vm: TestViewViewModel = .empty
+                @StateObject private var vm: TestViewViewModel = .empty()
 
                 @Environment(\.scope) private var viewWithViewModel_scope
 
@@ -78,7 +78,9 @@ final class LambdaspireSwiftUIFoundationsMacrosTests: XCTestCase {
                 init() {
                 }
             
-                static let empty: ViewModel  = .init()
+                static func empty() -> ViewModel {
+                    .init()
+                }
             }
 
             extension TestView : ViewWithViewModel {

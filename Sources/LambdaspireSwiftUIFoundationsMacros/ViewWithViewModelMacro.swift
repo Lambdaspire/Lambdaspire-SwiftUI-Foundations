@@ -21,7 +21,7 @@ public struct ViewWithViewModelMacro : ExtensionMacro, MemberMacro {
             
             return [
                 """
-                @StateObject private var vm: \(raw: type.trimmed)ViewModel = .empty
+                @StateObject private var vm: \(raw: type.trimmed)ViewModel = .empty()
                 """,
                 #"""
                 @Environment(\.scope) private var viewWithViewModel_scope

@@ -188,7 +188,7 @@ The `@ViewModel` macro:
 - Adds an `initialise(scope)` function that is called by the View to:
     - Initialise the ViewModel with dependencies, and
     - Invoke a `postInitialise` function which you can override (by default, a no-op).
-- With `generateEmpty: true`, generates an empty initializer and a static `empty` instance using it.
+- With `generateEmpty: true`, generates an empty initializer and an instance using a static `empty` function.
 
 Important notes:
 - Dependencies that are resolved exclusively via scope must be declared with `!` (e.g. `private var userContext: UserContext!`), since the dependency resolution occurs after Environment is installed on a View and therefore after the ViewModel's instantiation.

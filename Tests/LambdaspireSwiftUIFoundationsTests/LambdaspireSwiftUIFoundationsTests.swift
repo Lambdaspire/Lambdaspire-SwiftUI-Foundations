@@ -37,7 +37,7 @@ final class HomeScreenViewModel : ObservableObject {
 }
 
 extension HomeScreenViewModel {
-    static let empty: HomeScreenViewModel = .init(dependency: .init())
+    static func empty() -> HomeScreenViewModel { .init(dependency: .init()) }
 }
 
 class Dependency : ObservableObject {

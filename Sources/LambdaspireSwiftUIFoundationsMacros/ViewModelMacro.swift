@@ -52,7 +52,7 @@ public struct ViewModelMacro : ExtensionMacro, MemberMacro {
                     init() { }
                     """,
                     """
-                    static let empty: \(raw: type) = .init()
+                    static func empty() -> \(raw: type.trimmed) { .init() }
                     """
                 ]
                 : []

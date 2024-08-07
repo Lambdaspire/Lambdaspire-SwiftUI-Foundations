@@ -3,7 +3,7 @@ import Combine
 import LambdaspireAbstractions
 
 public protocol ViewModel : ObservableObject {
-    static var empty: Self { get }
+    static func empty() -> Self
     func initialise(scope: DependencyResolutionScope)
     func postInitialise()
 }
