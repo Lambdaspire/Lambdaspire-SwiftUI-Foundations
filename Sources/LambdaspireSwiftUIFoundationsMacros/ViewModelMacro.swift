@@ -19,6 +19,7 @@ public struct ViewModelMacro : ExtensionMacro, MemberMacro {
             
             let type = classDecl.name
             
+            // TODO: Consider inverting this. Also, it doesn't actually check the value here. 🤦‍♀️
             let shouldGenerateEmpty = node
                 .arguments?
                 .as(LabeledExprListSyntax.self)?
